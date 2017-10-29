@@ -1,5 +1,6 @@
 from scrapy import signals
 from scrapy import Spider
+from scrapy.crawler import CrawlerProcess
 import datetime
 import logging
 import csv
@@ -8,6 +9,7 @@ contracts_by_month = {1: 'F', 2: 'G', 3: 'H', 4: 'J', 5: 'K', 6: 'M', 7: 'N', 8:
 
 
 class QuotesSpider(Spider):
+
     name = "cboe"
 
     def __init__(self):
@@ -47,9 +49,7 @@ class QuotesSpider(Spider):
         return spider
 
     def spider_closed(self, spider):
-        print ('||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
-        self.write_to_file()
-
+        print (self.data)
         pass
 
     def get_front_month_names(self):
@@ -112,17 +112,23 @@ class QuotesSpider(Spider):
         # time = datetime.date.today()
         # filename = 'quote-scrape-%s.txt' % time
 
-        with open('../data/quote_scrap.csv', 'w') as csvfile:
+        with open('../../../data/quote_scrap.csv', 'w') as csvfile:
             fieldnames = self.tickers
 
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerow(self.data)
 
-            print (self.data)
-
             pass
 
         pass
 
     pass
+
+
+process = CrawlerProcess({
+    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+})
+
+process.crawl(QuotesSpider)
+process.start()

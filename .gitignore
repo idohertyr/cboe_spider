@@ -1,0 +1,4 @@
+.idea/
+api_key.py
+data/*
+__pycache__/
