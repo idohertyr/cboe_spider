@@ -47,8 +47,6 @@ class Instrument:
 
     def get_price_date(self):
 
-        global api_calls
-
         time_str = time.strftime('%Y%m%d')
 
         check_file = Path(ROOT_DIR + '/data/' + time_str + '-' + self.symbol.replace("/", "") + '.csv',)
@@ -60,7 +58,6 @@ class Instrument:
             print ('File did not exist and will be created.')
             self.data = quandl.get(self.symbol)
             write_to_file(self.data, self.symbol)
-            api_calls = api_calls + 1
 
         pass
 
