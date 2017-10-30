@@ -47,7 +47,9 @@ class Instrument:
 
     def get_price_date(self):
 
-        time_str = time.strftime('%Y%m%d')
+        time_str = time.strftime('%Y%m%d', time.localtime())
+
+        print ('Checking: ', time_str)
 
         check_file = Path(ROOT_DIR + '/data/' + time_str + '-' + self.symbol.replace("/", "") + '.csv',)
 
@@ -70,7 +72,7 @@ def write_to_file(data, name):
 
     """
 
-    time_str = time.strftime('%Y%m%d')
+    time_str = time.strftime('%Y%m%d', time.localtime())
 
     data.to_csv(Path(ROOT_DIR + '/data/' + time_str + '-' + name.replace("/", "") + '.csv'), index=True)
 
