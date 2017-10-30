@@ -20,6 +20,10 @@ quandl.ApiConfig.api_version = '2015-04-09'
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+os.environ['TZ'] = 'US/Eastern'
+time.tzset()
+print (time.tzname)
+
 #"CHRIS/CBOE_VIX3M",
 # Instruments
 instrument_list = [
