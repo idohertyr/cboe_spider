@@ -12,13 +12,13 @@ import quandl
 import time
 from pathlib import Path
 from api_key import *
+import os
 
 # Set API key
 quandl.ApiConfig.api_key = api_key
 quandl.ApiConfig.api_version = '2015-04-09'
 
-# Count API calls. If api_calls >= 20: time.sleep(600)
-api_calls = 0
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 #"CHRIS/CBOE_VIX3M",
 # Instruments
@@ -49,17 +49,15 @@ class Instrument:
 
         global api_calls
 
-        print ('Getting prices', self.symbol)
-
         time_str = time.strftime('%Y%m%d')
 
-        check_file = Path('./data/' + time_str + '-' + self.symbol.replace("/", "") + '.csv',)
-
-        print (check_file.is_file())
+        check_file = Path(ROOT_DIR + '/data/' + time_str + '-' + self.symbol.replace("/", "") + '.csv',)
 
         if check_file.is_file():
+            print ('File already existed.')
             pass
         else:
+            print ('File did not exist and will be created.')
             self.data = quandl.get(self.symbol)
             write_to_file(self.data, self.symbol)
             api_calls = api_calls + 1
@@ -89,9 +87,5 @@ for index, value in enumerate(instrument_list):
 
     instrument_list[index] = new_instrument
 
-    print (instrument_list[index])
-
     pass
 
-
-print (api_calls)
