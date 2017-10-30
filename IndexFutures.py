@@ -23,12 +23,12 @@ api_calls = 0
 #"CHRIS/CBOE_VIX3M",
 # Instruments
 instrument_list = [
-    "CBOE/VIX",
     "CBOE/VXST",
-    "CBOE/VVIX",
+    "CBOE/VIX",
     "CHRIS/CBOE_VX1",
     "CHRIS/CBOE_VX2",
     "CBOE/VXMT",
+    "CBOE/VVIX",
 ]
 
 
