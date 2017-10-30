@@ -75,7 +75,7 @@ def write_to_file(data, name):
 
     time_str = time.strftime('%Y%m%d')
 
-    data.to_csv('./data/' + time_str + '-' + name.replace("/", "") + '.csv', index=True)
+    data.to_csv(Path(ROOT_DIR + '/data/' + time_str + '-' + name.replace("/", "") + '.csv'), index=True)
 
     pass
 
